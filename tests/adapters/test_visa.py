@@ -1,7 +1,7 @@
 #
 # This file is part of the PyMeasure package.
 #
-# Copyright (c) 2013-2023 PyMeasure Developers
+# Copyright (c) 2013-2025 PyMeasure Developers
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -41,7 +41,8 @@ if not is_pyvisa_sim_installed:
 def adapter():
     adapter = VISAAdapter(SIM_RESOURCE, visa_library='@sim',
                           read_termination="\n",
-                          timeout=10,
+                          # Large timeout allows very slow GitHub action runners to complete.
+                          timeout=60,
                           )
     yield adapter
     # Empty the read buffer, as something might remain there after a test.
